@@ -24,7 +24,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Panel de Control',
                 items: [
 
-                    { label: 'Citas', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
+                    { label: 'Citas', icon: 'pi pi-fw pi-table', routerLink: ['/appointment'] },
 
                 ]
             },
