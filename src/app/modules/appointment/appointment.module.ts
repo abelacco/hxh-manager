@@ -6,20 +6,23 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule } from '@angular/common/http';
-
-
-
+import { TagModule } from 'primeng/tag';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { StatusPipe } from './pipes/status.pipe';
+import { SeverityPipe } from './pipes/severity.pipe';
 @NgModule({
-  declarations: [
-    AppointmentPageComponent,
-  ],
-  imports: [
-    CommonModule,
-    AppointmentRoutingModule,
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    HttpClientModule
-  ]
+    declarations: [AppointmentPageComponent, StatusPipe, SeverityPipe],
+    imports: [
+        CommonModule,
+        AppointmentRoutingModule,
+        TableModule,
+        ButtonModule,
+        InputTextModule,
+        HttpClientModule,
+        TagModule,
+        ConfirmPopupModule,
+        ConfirmDialogModule,
+    ],
 })
-export class AppointmentModule { }
+export class AppointmentModule {}
