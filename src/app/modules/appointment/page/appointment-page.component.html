@@ -201,7 +201,7 @@
                 <ng-template pTemplate="body" let-appointment>
                     <tr>
                         <td>
-                            <!-- <img 
+                            <!-- <img
                                 [alt]="customer.representative.name"
                                 src="assets/demo/images/avatar/{{
                                     customer.representative.image
@@ -236,39 +236,46 @@
                         </td>
                         <td>
                             <p-tag
+                                [class]="
+                                    'customer-badge status-' +
+                                    appointment.status
+                                "
                                 [value]="appointment.status | status"
                                 [severity]="appointment.status | severity"
-                                (click)="confirm1()"
+                                (click)="confirm1(appointment)"
                             >
-                                <p-confirmDialog #cd>
-                                    <ng-template pTemplate="header">
-                                        <h3>
-                                            Deseas aceptar o rechazar el pago?
-                                        </h3>
-                                    </ng-template>
-                                    <ng-template pTemplate="icon">
-                                        <i class="pi pi-user"></i>
-                                    </ng-template>
-                                    <ng-template pTemplate="message">
-                                        <p>Confirmación</p>
-                                    </ng-template>
-                                    <ng-template pTemplate="footer">
-                                        <button
-                                            type="button"
-                                            pButton
-                                            icon="pi pi-times"
-                                            label="Rechazar"
-                                            (click)="cd.reject()"
-                                        ></button>
-                                        <button
-                                            type="button"
-                                            pButton
-                                            icon="pi pi-check"
-                                            label="Aceptar"
-                                            (click)="cd.accept()"
-                                        ></button>
-                                    </ng-template> </p-confirmDialog
-                            ></p-tag>
+                            </p-tag>
+
+                            <p-confirmDialog
+                                key="cd{{ appointment._id }}"
+                                [style]="{ width: '50vw' }"
+                            >
+                                <ng-template pTemplate="header">
+                                    <h3>Confirmación</h3>
+                                </ng-template>
+                                <ng-template pTemplate="icon">
+                                    <i class="pi pi-user"></i>
+                                </ng-template>
+                                <ng-template pTemplate="message">
+                                    <p>¿Deseas aceptar o rechazar el pago?</p>
+                                </ng-template>
+                                <ng-template pTemplate="footer">
+                                    <button
+                                        type="button"
+                                        pButton
+                                        icon="pi pi-times"
+                                        label="Rechazar"
+                                        (click)="rejectAppointment(appointment)"
+                                    ></button>
+                                    <button
+                                        type="button"
+                                        pButton
+                                        icon="pi pi-check"
+                                        label="Aceptar"
+                                        (click)="acceptAppointment(appointment)"
+                                    ></button>
+                                </ng-template>
+                            </p-confirmDialog>
                         </td>
 
                         <p-toast></p-toast>
