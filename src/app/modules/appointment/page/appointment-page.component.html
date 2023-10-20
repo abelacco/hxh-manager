@@ -2,101 +2,49 @@
     <div class="col-12">
         <div class="card">
             <h5>Citas</h5>
-            <p-table
-                #dt1
-                [value]="appointments"
-                dataKey="id"
-                [rows]="10"
-                [loading]="false"
-                [rowHover]="true"
-                styleClass="p-datatable-gridlines"
-                [paginator]="true"
-                [globalFilterFields]="[
+            <p-table #dt1 [value]="appointments" dataKey="id" [rows]="10" [loading]="false" [rowHover]="true"
+                styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="[
                     'name',
                     'country.name',
                     'representative.name',
                     'status'
-                ]"
-                responsiveLayout="scroll"
-            >
+                ]" responsiveLayout="scroll">
                 <ng-template pTemplate="caption">
-                    <div
-                        class="flex justify-content-between flex-column sm:flex-row"
-                    >
-                        <button
-                            pButton
-                            label="Clear"
-                            class="p-button-outlined mb-2"
-                            icon="pi pi-filter-slash"
-                            (click)="clear(dt1)"
-                        ></button>
+                    <div class="flex justify-content-between flex-column sm:flex-row">
+                        <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash"
+                            (click)="clear(dt1)"></button>
                         <span class="p-input-icon-left mb-2">
                             <i class="pi pi-search"></i>
-                            <input
-                                pInputText
-                                type="text"
-                                #filter
-                                (input)="onGlobalFilter(dt1, $event)"
-                                placeholder="Search Keyword"
-                                class="w-full"
-                            />
+                            <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)"
+                                placeholder="Search Keyword" class="w-full" />
                         </span>
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th style="min-width: 14rem">
-                            <div
-                                class="flex justify-content-between align-items-center"
-                            >
+                            <div class="flex justify-content-between align-items-center">
                                 Código
-                                <p-columnFilter
-                                    field="representative"
-                                    matchMode="in"
-                                    display="menu"
-                                    [showMatchModes]="false"
-                                    [showOperator]="false"
-                                    [showAddButton]="false"
-                                >
+                                <p-columnFilter field="representative" matchMode="in" display="menu"
+                                    [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
                                     <ng-template pTemplate="header">
                                         <div class="px-3 pt-3 pb-0">
-                                            <span class="font-bold"
-                                                >Agent Picker</span
-                                            >
+                                            <span class="font-bold">Agent Picker</span>
                                         </div>
                                     </ng-template>
-                                    <ng-template
-                                        pTemplate="filter"
-                                        let-value
-                                        let-filter="filterCallback"
-                                    >
-                                        <p-multiSelect
-                                            [ngModel]="value"
-                                            [options]="representatives"
-                                            placeholder="Any"
-                                            (onChange)="filter($event.value)"
-                                            optionLabel="name"
-                                        >
-                                            <ng-template
-                                                let-option
-                                                pTemplate="item"
-                                            >
-                                                <div
-                                                    class="p-multiselect-representative-option"
-                                                >
-                                                    <img
-                                                        [alt]="option.label"
-                                                        src="assets/demo/images/avatar/{{
+                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                        <p-multiSelect [ngModel]="value" [options]="representatives" placeholder="Any"
+                                            (onChange)="filter($event.value)" optionLabel="name">
+                                            <ng-template let-option pTemplate="item">
+                                                <div class="p-multiselect-representative-option">
+                                                    <img [alt]="option.label" src="assets/demo/images/avatar/{{
                                                             option.image
-                                                        }}"
-                                                        width="32"
-                                                        style="
+                                                        }}" width="32" style="
                                                             vertical-align: middle;
-                                                        "
-                                                    />
+                                                        " />
                                                     <span class="ml-2">{{
                                                         option.name
-                                                    }}</span>
+                                                        }}</span>
                                                 </div>
                                             </ng-template>
                                         </p-multiSelect>
@@ -105,91 +53,47 @@
                             </div>
                         </th>
                         <th style="min-width: 12rem">
-                            <div
-                                class="flex justify-content-between align-items-center"
-                            >
+                            <div class="flex justify-content-between align-items-center">
                                 Doctor
-                                <p-columnFilter
-                                    type="text"
-                                    field="name"
-                                    display="menu"
-                                    placeholder="Search by name"
-                                ></p-columnFilter>
+                                <p-columnFilter type="text" field="name" display="menu"
+                                    placeholder="Search by name"></p-columnFilter>
                             </div>
                         </th>
                         <th style="min-width: 12rem">
-                            <div
-                                class="flex justify-content-between align-items-center"
-                            >
+                            <div class="flex justify-content-between align-items-center">
                                 Paciente
-                                <p-columnFilter
-                                    type="text"
-                                    field="country.name"
-                                    display="menu"
-                                    placeholder="Search by country"
-                                ></p-columnFilter>
+                                <p-columnFilter type="text" field="country.name" display="menu"
+                                    placeholder="Search by country"></p-columnFilter>
                             </div>
                         </th>
 
                         <th style="min-width: 10rem">
-                            <div
-                                class="flex justify-content-between align-items-center"
-                            >
+                            <div class="flex justify-content-between align-items-center">
                                 Fecha
-                                <p-columnFilter
-                                    type="date"
-                                    field="date"
-                                    display="menu"
-                                    placeholder="mm/dd/yyyy"
-                                ></p-columnFilter>
+                                <p-columnFilter type="date" field="date" display="menu"
+                                    placeholder="mm/dd/yyyy"></p-columnFilter>
                             </div>
                         </th>
                         <th style="min-width: 10rem">
-                            <div
-                                class="flex justify-content-between align-items-center"
-                            >
+                            <div class="flex justify-content-between align-items-center">
                                 Tarifa
-                                <p-columnFilter
-                                    type="numeric"
-                                    field="balance"
-                                    display="menu"
-                                    currency="USD"
-                                ></p-columnFilter>
+                                <p-columnFilter type="numeric" field="balance" display="menu"
+                                    currency="USD"></p-columnFilter>
                             </div>
                         </th>
                         <th style="min-width: 12rem">
-                            <div
-                                class="flex justify-content-between align-items-center"
-                            >
+                            <div class="flex justify-content-between align-items-center">
                                 Status
-                                <p-columnFilter
-                                    field="status"
-                                    matchMode="equals"
-                                    display="menu"
-                                >
-                                    <ng-template
-                                        pTemplate="filter"
-                                        let-value
-                                        let-filter="filterCallback"
-                                    >
-                                        <p-dropdown
-                                            [ngModel]="value"
-                                            [options]="statuses"
-                                            (onChange)="filter($event.value)"
-                                            placeholder="Any"
-                                            [style]="{ 'min-width': '12rem' }"
-                                        >
-                                            <ng-template
-                                                let-option
-                                                pTemplate="item"
-                                            >
-                                                <span
-                                                    [class]="
+                                <p-columnFilter field="status" matchMode="equals" display="menu">
+                                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                        <p-dropdown [ngModel]="value" [options]="statuses"
+                                            (onChange)="filter($event.value)" placeholder="Any"
+                                            [style]="{ 'min-width': '12rem' }">
+                                            <ng-template let-option pTemplate="item">
+                                                <span [class]="
                                                         'customer-badge status-' +
                                                         option.value
-                                                    "
-                                                    >{{ option.label }}</span
-                                                >
+                                                    ">{{ option.label }}</span>
                                             </ng-template>
                                         </p-dropdown>
                                     </ng-template>
@@ -201,7 +105,7 @@
                 <ng-template pTemplate="body" let-appointment>
                     <tr>
                         <td>
-                            <!-- <img 
+                            <!-- <img
                                 [alt]="customer.representative.name"
                                 src="assets/demo/images/avatar/{{
                                     customer.representative.image
@@ -235,54 +139,33 @@
                             {{ appointment.fee | currency : "USD" : "symbol" }}
                         </td>
                         <td>
-                            <p-tag
-                                [class]="
+                            <p-tag [class]="
                                     'customer-badge status-' +
                                     appointment.status
-                                "
-                                [value]="appointment.status | status"
-                                [severity]="appointment.status | severity"
-                                (click)="confirm1(appointment)"
-                            >
-                                <p-confirmDialog
-                                    #cd
-                                    [style]="{ width: '50vw' }"
-                                >
-                                    <ng-template pTemplate="header">
-                                        <h3>Confirmación</h3>
-                                    </ng-template>
-                                    <ng-template pTemplate="icon">
-                                        <i class="pi pi-user"></i>
-                                    </ng-template>
-                                    <ng-template pTemplate="message">
-                                        <p>
-                                            Deseas aceptar o rechazar el pago?
-                                        </p>
-                                    </ng-template>
-                                    <ng-template pTemplate="footer">
-                                        <button
-                                            type="button"
-                                            pButton
-                                            icon="pi pi-times"
-                                            label="Rechazar"
-                                            (click)="cd.reject()"
-                                        ></button>
-                                        <button
-                                            type="button"
-                                            pButton
-                                            icon="pi pi-check"
-                                            label="Aceptar"
-                                            (click)="cd.accept()"
-                                        ></button>
-                                    </ng-template> </p-confirmDialog
-                            ></p-tag>
+                                " [value]="appointment.status | status" [severity]="appointment.status | severity"
+                                (click)="confirm1(appointment)">
+                            </p-tag>
 
-                            <!-- <span
-                                [class]="
-                                    'customer-badge status-' + customer.status
-                                "
-                                >{{ customer.status }}</span
-                            > -->
+                            <p-confirmDialog key="cd{{appointment._id}}" [style]="{ width: '50vw' }">
+                                <ng-template pTemplate="header">
+                                    <h3>Confirmación</h3>
+                                </ng-template>
+                                <ng-template pTemplate="icon">
+                                    <i class="pi pi-user"></i>
+                                </ng-template>
+                                <ng-template pTemplate="message">
+                                    <p>
+                                        ¿Deseas aceptar o rechazar el pago?
+                                    </p>
+                                </ng-template>
+                                <ng-template pTemplate="footer">
+                                    <button type="button" pButton icon="pi pi-times" label="Rechazar"
+                                    (click)="rejectAppointment(appointment)"></button>
+                                    <button type="button" pButton icon="pi pi-check" label="Aceptar"
+                                    (click)="acceptAppointment(appointment)"  ></button>
+                                </ng-template>
+                            </p-confirmDialog>
+
                         </td>
 
                         <p-toast></p-toast>
