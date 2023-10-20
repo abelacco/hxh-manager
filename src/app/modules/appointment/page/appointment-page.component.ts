@@ -40,7 +40,7 @@ export class AppointmentPageComponent {
         });
     }
 
-    confirm1(id: any) {
+    confirm1() {
         this.confirmationService.confirm({
             accept: () => {
                 this.messageService.add({

@@ -236,28 +236,21 @@
                         </td>
                         <td>
                             <p-tag
-                                [class]="
-                                    'customer-badge status-' +
-                                    appointment.status
-                                "
                                 [value]="appointment.status | status"
                                 [severity]="appointment.status | severity"
-                                (click)="confirm1(appointment)"
+                                (click)="confirm1()"
                             >
-                                <p-confirmDialog
-                                    #cd
-                                    [style]="{ width: '50vw' }"
-                                >
+                                <p-confirmDialog #cd>
                                     <ng-template pTemplate="header">
-                                        <h3>Confirmación</h3>
+                                        <h3>
+                                            Deseas aceptar o rechazar el pago?
+                                        </h3>
                                     </ng-template>
                                     <ng-template pTemplate="icon">
                                         <i class="pi pi-user"></i>
                                     </ng-template>
                                     <ng-template pTemplate="message">
-                                        <p>
-                                            Deseas aceptar o rechazar el pago?
-                                        </p>
+                                        <p>Confirmación</p>
                                     </ng-template>
                                     <ng-template pTemplate="footer">
                                         <button
@@ -276,13 +269,6 @@
                                         ></button>
                                     </ng-template> </p-confirmDialog
                             ></p-tag>
-
-                            <!-- <span
-                                [class]="
-                                    'customer-badge status-' + customer.status
-                                "
-                                >{{ customer.status }}</span
-                            > -->
                         </td>
 
                         <p-toast></p-toast>
