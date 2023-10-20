@@ -8,8 +8,8 @@ import { Appointment } from '../interface/appointment';
 })
 export class AppointmentService {
 
-    // private readonly endpoint = 'https://qali-services-production.up.railway.app/api/v1/appointment';
-    private readonly endpoint = 'http://localhost:3001/api/v1/appointment';
+    private readonly endpoint = 'https://qali-services-production.up.railway.app/api/v1/appointment';
+    // private readonly endpoint = 'http://localhost:3001/api/v1/appointment';
 
 
     constructor(private http: HttpClient) { }
