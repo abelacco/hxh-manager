@@ -243,6 +243,7 @@
                                 [value]="appointment.status | status"
                                 [severity]="appointment.status | severity"
                                 (click)="confirm1(appointment)"
+                                [style]="cursorAppointment(appointment)"
                             >
                             </p-tag>
 
