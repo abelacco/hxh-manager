@@ -1,8 +1,12 @@
 <div class="grid">
-    <div class="col-12">
-        <div class="card">
+    <div class="col-12" >
+        <p-progressSpinner *ngIf="loading"></p-progressSpinner>
+        <div class="card"  *ngIf="!loading">
+
+
             <h5>Citas</h5>
             <p-table
+
                 #dt1
                 [value]="appointments"
                 dataKey="id"
@@ -250,33 +254,38 @@
                             <p-confirmDialog
                                 key="cd{{ appointment._id }}"
                                 [style]="{ width: '50vw' }"
-                            >
-                                <ng-template pTemplate="header">
-                                    <h3>Confirmación</h3>
-                                </ng-template>
-                                <ng-template pTemplate="icon">
-                                    <i class="pi pi-user"></i>
-                                </ng-template>
-                                <ng-template pTemplate="message">
-                                    <p>¿Deseas aceptar o rechazar el pago?</p>
-                                </ng-template>
-                                <ng-template pTemplate="footer">
-                                    <button
-                                        type="button"
-                                        pButton
-                                        icon="pi pi-times"
-                                        label="Rechazar"
-                                        (click)="rejectAppointment(appointment)"
-                                    ></button>
-                                    <button
-                                        type="button"
-                                        pButton
-                                        icon="pi pi-check"
-                                        label="Aceptar"
-                                        (click)="acceptAppointment(appointment)"
-                                    ></button>
-                                </ng-template>
+                            >   <ng-container *ngIf="!loadingUpdate">
+                                    <ng-template pTemplate="header">
+                                        <h3>Confirmación</h3>
+                                    </ng-template>
+                                    <ng-template pTemplate="icon">
+                                        <i class="pi pi-user"></i>
+                                    </ng-template>
+                                    <ng-template pTemplate="message">
+                                        <p>¿Deseas aceptar o rechazar el pago?</p>
+                                    </ng-template>
+                                    <ng-template pTemplate="footer">
+                                        <button
+                                            type="button"
+                                            pButton
+                                            icon="pi pi-times"
+                                            label="Rechazar"
+                                            (click)="rejectAppointment(appointment)"
+                                        ></button>
+                                        <button
+                                            type="button"
+                                            pButton
+                                            icon="pi pi-check"
+                                            label="Aceptar"
+                                            (click)="acceptAppointment(appointment)"
+                                        ></button>
+                                    </ng-template>
+                                </ng-container>
+
+                                <p-progressSpinner *ngIf="loadingUpdate"></p-progressSpinner>
+
                             </p-confirmDialog>
+
                         </td>
 
                         <p-toast></p-toast>
