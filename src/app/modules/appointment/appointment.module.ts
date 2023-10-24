@@ -11,6 +11,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { StatusPipe } from './pipes/status.pipe';
 import { SeverityPipe } from './pipes/severity.pipe';
+import { ToastModule } from 'primeng/toast';
 import { ConfirmationService } from 'primeng/api';
 @NgModule({
     declarations: [AppointmentPageComponent, StatusPipe, SeverityPipe],
@@ -24,7 +25,8 @@ import { ConfirmationService } from 'primeng/api';
         TagModule,
         ConfirmPopupModule,
         ConfirmDialogModule,
+        ToastModule,
     ],
-    providers: [ConfirmationService]
+    providers: [ConfirmationService],
 })
 export class AppointmentModule {}
