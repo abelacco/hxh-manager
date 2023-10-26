@@ -1,12 +1,8 @@
 <div class="grid">
-    <div class="col-12" >
-        <p-progressSpinner *ngIf="loading"></p-progressSpinner>
-        <div class="card"  *ngIf="!loading">
-
-
+    <div class="col-12">
+        <div class="card">
             <h5>Citas</h5>
             <p-table
-
                 #dt1
                 [value]="appointments"
                 dataKey="id"
@@ -48,12 +44,25 @@
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
-                    <tr>
+                    <p-progressSpinner
+                        style="
+                            display: flex;
+                            text-align: center;
+                            align-items: center;
+                        "
+                        *ngIf="loading"
+                    ></p-progressSpinner>
+                    <tr *ngIf="!loading">
                         <th style="min-width: 14rem">
                             <div
                                 class="flex justify-content-between align-items-center"
                             >
                                 Código
+                                <p-multiSelect
+                                    [options]="appointments"
+                                    formControlName="selectedCodes"
+                                    optionLabel="code"
+                                ></p-multiSelect>
                                 <p-columnFilter
                                     field="representative"
                                     matchMode="in"
@@ -166,6 +175,11 @@
                                 class="flex justify-content-between align-items-center"
                             >
                                 Status
+                                <p-multiSelect
+                                    [options]="appointments"
+                                    formControlName="selectedStates"
+                                    optionLabel="status"
+                                ></p-multiSelect>
                                 <p-columnFilter
                                     field="status"
                                     matchMode="equals"
@@ -239,53 +253,74 @@
                             {{ appointment.fee | currency : "USD" : "symbol" }}
                         </td>
                         <td>
-                            <p-tag
-                                [class]="
-                                    'customer-badge status-' +
-                                    appointment.status
-                                "
-                                [value]="appointment.status | status"
-                                [severity]="appointment.status | severity"
-                                (click)="confirm1(appointment)"
-                                [style]="cursorAppointment(appointment)"
-                            >
-                            </p-tag>
+                            <div>
+                                <p-tag
+                                    [class]="
+                                        'customer-badge status-' +
+                                        appointment.status
+                                    "
+                                    [value]="appointment.status | status"
+                                    [severity]="appointment.status | severity"
+                                    (click)="confirm1(appointment)"
+                                    [style]="cursorAppointment(appointment)"
+                                >
+                                </p-tag>
 
-                            <p-confirmDialog
-                                key="cd{{ appointment._id }}"
-                                [style]="{ width: '50vw' }"
-                            >   <ng-container *ngIf="!loadingUpdate">
-                                    <ng-template pTemplate="header">
-                                        <h3>Confirmación</h3>
-                                    </ng-template>
-                                    <ng-template pTemplate="icon">
-                                        <i class="pi pi-user"></i>
-                                    </ng-template>
-                                    <ng-template pTemplate="message">
-                                        <p>¿Deseas aceptar o rechazar el pago?</p>
-                                    </ng-template>
-                                    <ng-template pTemplate="footer">
-                                        <button
-                                            type="button"
-                                            pButton
-                                            icon="pi pi-times"
-                                            label="Rechazar"
-                                            (click)="rejectAppointment(appointment)"
-                                        ></button>
-                                        <button
-                                            type="button"
-                                            pButton
-                                            icon="pi pi-check"
-                                            label="Aceptar"
-                                            (click)="acceptAppointment(appointment)"
-                                        ></button>
-                                    </ng-template>
-                                </ng-container>
-
-                                <p-progressSpinner *ngIf="loadingUpdate"></p-progressSpinner>
-
-                            </p-confirmDialog>
-
+                                <p-confirmDialog
+                                    key="cd{{ appointment._id }}"
+                                    [style]="{ width: '50vw' }"
+                                >
+                                    <ng-container>
+                                        <p-progressSpinner
+                                            style="
+                                                display: flex;
+                                                text-align: center;
+                                                align-items: center;
+                                            "
+                                            *ngIf="loadingUpdate"
+                                        ></p-progressSpinner>
+                                        <ng-template
+                                            *ngIf="!loadingUpdate"
+                                            pTemplate="header"
+                                        >
+                                            <h3>Confirmación</h3>
+                                        </ng-template>
+                                        <ng-template pTemplate="icon">
+                                            <i class="pi pi-user"></i>
+                                        </ng-template>
+                                        <ng-template pTemplate="message">
+                                            <p>
+                                                ¿Deseas aceptar o rechazar el
+                                                pago?
+                                            </p>
+                                        </ng-template>
+                                        <ng-template pTemplate="footer">
+                                            <button
+                                                type="button"
+                                                pButton
+                                                icon="pi pi-times"
+                                                label="Rechazar"
+                                                (click)="
+                                                    rejectAppointment(
+                                                        appointment
+                                                    )
+                                                "
+                                            ></button>
+                                            <button
+                                                type="button"
+                                                pButton
+                                                icon="pi pi-check"
+                                                label="Aceptar"
+                                                (click)="
+                                                    acceptAppointment(
+                                                        appointment
+                                                    )
+                                                "
+                                            ></button>
+                                        </ng-template>
+                                    </ng-container>
+                                </p-confirmDialog>
+                            </div>
                         </td>
 
                         <p-toast></p-toast>
@@ -293,7 +328,9 @@
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="8">No customers found.</td>
+                        <td colspan="8" *ngIf="!loading">
+                            No customers found.
+                        </td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="loadingbody">

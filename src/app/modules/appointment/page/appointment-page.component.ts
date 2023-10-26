@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Appointment } from '../interface/appointment';
 import { AppointmentService } from '../services/appointment.service';
 import {
@@ -6,6 +6,7 @@ import {
     MessageService,
     ConfirmEventType,
 } from 'primeng/api';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-appointment-page',
@@ -13,7 +14,16 @@ import {
     styleUrls: ['./appointment-page.component.scss'],
     providers: [ConfirmationService, MessageService],
 })
-export class AppointmentPageComponent {
+export class AppointmentPageComponent implements OnInit {
+    codes!: string[];
+    doctors!: string[];
+    patients!: string[];
+    dates!: Date[];
+    rates!: number[];
+    states!: number[];
+
+    formGroup!: FormGroup;
+
     customers1 = [];
     loading: boolean = false;
     loadingUpdate: boolean = false;
@@ -27,6 +37,9 @@ export class AppointmentPageComponent {
 
     ngOnInit(): void {
         this.fetchAppointments();
+        for (let appointment in this.appointments) {
+            this.codes.push(appointment);
+        }
     }
 
     fetchAppointments(): void {
@@ -45,7 +58,6 @@ export class AppointmentPageComponent {
     }
 
     updateAppoinment(appointment: Appointment): void {
-        this.loadingUpdate = true;
         this.appointmentService.updateAppointment(appointment).subscribe({
             next: (data: Appointment[]) => {
                 // this.appointments = data;
@@ -54,7 +66,6 @@ export class AppointmentPageComponent {
                 this.fetchAppointments();
             },
             error: (error) => {
-                this.loadingUpdate = false;
                 console.error('Error al actualizar cita:', error);
             },
         });
@@ -83,11 +94,12 @@ export class AppointmentPageComponent {
             summary: 'Confirmed',
             detail: 'Cita Aceptada',
         });
-        this.loadingUpdate = false
+        this.loadingUpdate = false;
         // Cerrar el diálogo manualmente (si es necesario)
     }
 
     rejectAppointment(appointment: Appointment) {
+        this.loadingUpdate = true;
         appointment.status = 3; // Puedes cambiar esto según tu lógica
         this.updateAppoinment(appointment);
         this.messageService.add({
@@ -95,6 +107,7 @@ export class AppointmentPageComponent {
             summary: 'Rejected',
             detail: 'Cita Rechazada',
         });
+        this.loadingUpdate = false;
         // Cerrar el diálogo manualmente (si es necesario)
     }
 
