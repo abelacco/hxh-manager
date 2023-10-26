@@ -13,11 +13,22 @@ import {
     styleUrls: ['./appointment-page.component.scss'],
     providers: [ConfirmationService, MessageService],
 })
+
+// code: '0' , doctorName = '1' , clienteName = '2'
+
 export class AppointmentPageComponent {
     customers1 = [];
     loading: boolean = false;
     loadingUpdate: boolean = false;
     appointments: Appointment[] = []; // Un array para guardar las citas.
+    filters : any = {
+        status: null,
+        date: [],
+        filterby: null,
+        text: "",
+        page: 1,
+        size: 10
+    }
 
     constructor(
         private appointmentService: AppointmentService,
