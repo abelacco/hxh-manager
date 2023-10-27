@@ -11,12 +11,6 @@
                 [rowHover]="true"
                 styleClass="p-datatable-gridlines"
                 [paginator]="true"
-                [globalFilterFields]="[
-                    'name',
-                    'country.name',
-                    'representative.name',
-                    'status'
-                ]"
                 responsiveLayout="scroll"
             >
                 <ng-template pTemplate="caption">
@@ -55,66 +49,59 @@
                     <tr *ngIf="!loading">
                         <th style="min-width: 14rem">
                             <div
-                                class="flex justify-content-between align-items-center"
+                                class="flex justify-content-between align-items-center flex-column"
                             >
                                 Código
                                 <p-multiSelect
+                                    class="mt-2"
                                     [options]="appointments"
                                     formControlName="selectedCodes"
                                     optionLabel="code"
                                 ></p-multiSelect>
-                                <p-columnFilter
-                                    field="representative"
-                                    matchMode="in"
-                                    display="menu"
-                                    [showMatchModes]="false"
-                                    [showOperator]="false"
-                                    [showAddButton]="false"
+
+                                <ng-template
+                                    pTemplate="filter"
+                                    let-value
+                                    let-filter="filterCallback"
                                 >
-                                    <ng-template pTemplate="header">
-                                        <div class="px-3 pt-3 pb-0">
-                                            <span class="font-bold"
-                                                >Agent Picker</span
-                                            >
-                                        </div>
-                                    </ng-template>
-                                    <ng-template
-                                        pTemplate="filter"
-                                        let-value
-                                        let-filter="filterCallback"
+                                    <p-multiSelect
+                                        [ngModel]="value"
+                                        [options]="representatives"
+                                        placeholder="Any"
+                                        (onChange)="filter($event.value)"
+                                        optionLabel="name"
                                     >
-                                        <p-multiSelect
-                                            [ngModel]="value"
-                                            [options]="representatives"
-                                            placeholder="Any"
-                                            (onChange)="filter($event.value)"
-                                            optionLabel="name"
+                                        <ng-template
+                                            let-option
+                                            pTemplate="item"
                                         >
-                                            <ng-template
-                                                let-option
-                                                pTemplate="item"
+                                            <div
+                                                class="p-multiselect-representative-option"
                                             >
-                                                <div
-                                                    class="p-multiselect-representative-option"
-                                                >
-                                                    <img
-                                                        [alt]="option.label"
-                                                        src="assets/demo/images/avatar/{{
-                                                            option.image
-                                                        }}"
-                                                        width="32"
-                                                        style="
-                                                            vertical-align: middle;
-                                                        "
-                                                    />
-                                                    <span class="ml-2">{{
-                                                        option.name
-                                                    }}</span>
-                                                </div>
-                                            </ng-template>
-                                        </p-multiSelect>
-                                    </ng-template>
-                                </p-columnFilter>
+                                                <img
+                                                    [alt]="option.label"
+                                                    src="assets/demo/images/avatar/{{
+                                                        option.image
+                                                    }}"
+                                                    width="32"
+                                                    style="
+                                                        vertical-align: middle;
+                                                    "
+                                                />
+                                                <span class="ml-2">{{
+                                                    option.name
+                                                }}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </ng-template>
+                            </div>
+                        </th>
+                        <th style="min-width: 12rem">
+                            <div
+                                class="flex justify-content-between align-items-center"
+                            >
+                                Voucher
                             </div>
                         </th>
                         <th style="min-width: 12rem">
@@ -122,12 +109,6 @@
                                 class="flex justify-content-between align-items-center"
                             >
                                 Doctor
-                                <p-columnFilter
-                                    type="text"
-                                    field="name"
-                                    display="menu"
-                                    placeholder="Search by name"
-                                ></p-columnFilter>
                             </div>
                         </th>
                         <th style="min-width: 12rem">
@@ -135,12 +116,6 @@
                                 class="flex justify-content-between align-items-center"
                             >
                                 Paciente
-                                <p-columnFilter
-                                    type="text"
-                                    field="country.name"
-                                    display="menu"
-                                    placeholder="Search by country"
-                                ></p-columnFilter>
                             </div>
                         </th>
 
@@ -149,12 +124,6 @@
                                 class="flex justify-content-between align-items-center"
                             >
                                 Fecha
-                                <p-columnFilter
-                                    type="date"
-                                    field="date"
-                                    display="menu"
-                                    placeholder="mm/dd/yyyy"
-                                ></p-columnFilter>
                             </div>
                         </th>
                         <th style="min-width: 10rem">
@@ -162,12 +131,6 @@
                                 class="flex justify-content-between align-items-center"
                             >
                                 Tarifa
-                                <p-columnFilter
-                                    type="numeric"
-                                    field="balance"
-                                    display="menu"
-                                    currency="USD"
-                                ></p-columnFilter>
                             </div>
                         </th>
                         <th style="min-width: 12rem">
@@ -180,38 +143,6 @@
                                     formControlName="selectedStates"
                                     optionLabel="status"
                                 ></p-multiSelect>
-                                <p-columnFilter
-                                    field="status"
-                                    matchMode="equals"
-                                    display="menu"
-                                >
-                                    <ng-template
-                                        pTemplate="filter"
-                                        let-value
-                                        let-filter="filterCallback"
-                                    >
-                                        <p-dropdown
-                                            [ngModel]="value"
-                                            [options]="statuses"
-                                            (onChange)="filter($event.value)"
-                                            placeholder="Any"
-                                            [style]="{ 'min-width': '12rem' }"
-                                        >
-                                            <ng-template
-                                                let-option
-                                                pTemplate="item"
-                                            >
-                                                <span
-                                                    [class]="
-                                                        'customer-badge status-' +
-                                                        option.value
-                                                    "
-                                                    >{{ option.label }}</span
-                                                >
-                                            </ng-template>
-                                        </p-dropdown>
-                                    </ng-template>
-                                </p-columnFilter>
                             </div>
                         </th>
                     </tr>
@@ -219,31 +150,22 @@
                 <ng-template pTemplate="body" let-appointment>
                     <tr>
                         <td>
-                            <!-- <img
-                                [alt]="customer.representative.name"
-                                src="assets/demo/images/avatar/{{
-                                    customer.representative.image
-                                }}"
-                                width="32"
-                                style="vertical-align: middle"
-                            />
-                            <span class="image-text ml-2">{{
-                                customer.representative.name
-                            }}</span> -->
                             {{ appointment.code }}
+                        </td>
+                        <td
+                            class="flex align-items-center justify-content-center"
+                        >
+                            <p-image
+                                src="{{ appointment.voucher }}"
+                                alt="Image"
+                                width="35"
+                                [preview]="true"
+                            ></p-image>
                         </td>
                         <td>
                             {{ appointment.doctorId.name }}
                         </td>
                         <td>
-                            <!-- <img
-                                src="assets/demo/images/flag/flag_placeholder.png"
-                                [class]="'flag flag-' + customer.country.code"
-                                width="30"
-                            />
-                            <span class="image-text ml-2">{{
-                                customer.country.name
-                            }}</span> -->
                             {{ appointment.patientId.name }}
                         </td>
                         <td>
