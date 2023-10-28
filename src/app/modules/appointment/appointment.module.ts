@@ -15,6 +15,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ImageModule } from 'primeng/image';
 @NgModule({
     declarations: [AppointmentPageComponent, StatusPipe, SeverityPipe],
     imports: [
@@ -30,6 +31,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
         ToastModule,
         ProgressSpinnerModule,
         MultiSelectModule,
+        ImageModule,
     ],
     providers: [ConfirmationService],
 })

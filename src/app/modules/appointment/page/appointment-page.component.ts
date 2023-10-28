@@ -15,13 +15,6 @@ import { FormControl, FormGroup } from '@angular/forms';
     providers: [ConfirmationService, MessageService],
 })
 export class AppointmentPageComponent implements OnInit {
-    codes!: string[];
-    doctors!: string[];
-    patients!: string[];
-    dates!: Date[];
-    rates!: number[];
-    states!: number[];
-
     formGroup!: FormGroup;
 
     customers1 = [];
@@ -45,9 +38,6 @@ export class AppointmentPageComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchAppointments();
-        for (let appointment in this.appointments) {
-            this.codes.push(appointment);
-        }
     }
 
     fetchAppointments(): void {
