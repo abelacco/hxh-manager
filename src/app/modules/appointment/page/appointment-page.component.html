@@ -150,13 +150,13 @@
                 <ng-template pTemplate="body" let-appointment>
                     <tr>
                         <td>
-                            {{ appointment.code }}
+                            {{ appointment?.code }}
                         </td>
                         <td
                             class="flex align-items-center justify-content-center"
                         >
                             <p-image
-                                src="{{ appointment.voucher }}"
+                                src="{{ appointment?.voucher }}"
                                 alt="Image"
                                 width="35"
                                 [preview]="true"
@@ -166,7 +166,7 @@
                             {{ appointment.doctorId.name }}
                         </td>
                         <td>
-                            {{ appointment.patientId.name }}
+                            {{ appointment?.patientId?.name }}
                         </td>
                         <td>
                             {{ appointment.date | date : "short" }}

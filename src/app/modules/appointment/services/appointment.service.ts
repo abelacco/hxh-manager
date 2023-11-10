@@ -20,7 +20,7 @@ export class AppointmentService {
 
     updateAppointment(appointmentUpdate: any): Observable<Appointment[]> {
         console.log('Cita a actualizar:', appointmentUpdate);
-        return this.http.patch<any>(`${this.endpoint}/${appointmentUpdate._id}`, {status: appointmentUpdate.status})
+        return this.http.patch<any>(`${this.endpoint}/update/status/${appointmentUpdate._id}`, {status: appointmentUpdate.status})
             .pipe(
                 catchError((error: any) => {
                     console.error('Ocurrió un error:', error);  // Esto mostrará el error completo en la consola.
