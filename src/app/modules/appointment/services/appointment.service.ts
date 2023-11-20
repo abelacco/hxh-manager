@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Appointment } from '../interface/appointment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
 
-    private readonly endpoint = 'https://qali-services-production.up.railway.app/api/v1/appointment';
-    // private readonly endpoint = 'http://localhost:3001/api/v1/appointment';
+    private readonly endpoint = `${environment.apiEndpoint}appointment`;
 
 
     constructor(private http: HttpClient) { }

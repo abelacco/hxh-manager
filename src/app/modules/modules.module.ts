@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { LocalDateTimePipe } from './pipes/local-date-time.pipe';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [LocalDateTimePipe],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [LocalDateTimePipe]
 })
 export class ModulesModule { }
