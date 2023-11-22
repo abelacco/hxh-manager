@@ -31,8 +31,8 @@ export class PaymentDoctorComponent implements OnInit {
     fetchPayments(): void {
         this.loading = true;
         this.paymentDoctorService.getPaymentsDoctors().subscribe({
-            next: (data: IPaymentDoctor[]) => {
-                this.payments = data;
+            next: (data: any) => {
+                this.payments = data.data;
                 this.loading = false;
                 console.log('Pagos cargados:', this.payments);
             },

@@ -16,7 +16,7 @@ export class PaymentDoctorService {
     constructor(private http: HttpClient) { }
 
     getPaymentsDoctors(): Observable<IPaymentDoctor[]> {
-
+        
         return this.http.get<IPaymentDoctor[]>(this.endpoint);
       }
 
