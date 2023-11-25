@@ -10,8 +10,9 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                 path: '', component: AppLayoutComponent,
                 children: [
                     { path: '', loadChildren: () => import('./demo/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
-                    { path: 'appointment', loadChildren: () => import('./modules/appointment/appointment.module').then(m => m.AppointmentModule) },
+                    { path: 'citas', loadChildren: () => import('./modules/appointment/appointment.module').then(m => m.AppointmentModule) },
                     { path: 'liquidaciones', loadChildren: () => import('./modules/payments/payments.module').then(m => m.PaymentsModule) },
+                    { path: 'doctores', loadChildren: () => import('./modules/doctor/doctor.module').then(m => m.DoctorModule) },
                     // { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
                 ]
             },

@@ -24,7 +24,8 @@ export class AppMenuComponent implements OnInit {
                 label: 'Panel de Control',
                 items: [
 
-                    { label: 'Citas', icon: 'pi pi-fw pi-table', routerLink: ['/appointment'] },
+                    { label: 'Citas', icon: 'pi pi-fw pi-table', routerLink: ['/citas'] },
+                    { label: 'Doctores', icon: 'pi pi-fw pi-table', routerLink: ['/doctores'] },
                     {
                         label: 'Liquidaciones',
                         icon: 'pi pi-fw pi-money-bill', // Puedes cambiar el icono según tus necesidades

@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    apiEndpoint: 'https://qali-services-develop.up.railway.app/api/v1/'
-    // apiEndpoint: 'http://localhost:3001/api/v1/'
+    // apiEndpoint: 'https://qali-services-production.up.railway.app/api/v1/'
+    apiEndpoint: 'http://localhost:3001/api/v1/'
   };
 
 

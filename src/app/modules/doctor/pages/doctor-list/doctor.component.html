@@ -1,0 +1,45 @@
+<div class="grid">
+    <div class="col-12">
+      <div class="card" >
+        <h5>Lista de Doctores</h5>
+        <ng-container *ngIf="!loading; else loadingTemplate">
+        <!-- <p-table [value]="doctors" dataKey="_id" [rows]="limit" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [totalRecords]="totalRecords" (onLazyLoad)="onTableLazyLoad($event)" responsiveLayout="scroll"> -->
+            <p-table [value]="doctors" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"  [showCurrentPageReport]="true"  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [rows]="limit" [totalRecords]="totalRecords" (onLazyLoad)="onPageChange($event)">
+            <ng-template pTemplate="header">
+            <tr>
+              <th>Doctor</th>
+              <th>Especialidad</th>
+              <th>Tarifa</th>
+              <th>Dirección</th>
+              <th>Imagen</th>
+              <th>Modalidad</th>
+              <th>Acción</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-doctor>
+            <tr>
+              <td>{{ doctor.name }}</td>
+              <td>{{ doctor.speciality }}</td>
+              <td>{{ doctor.fee | currency: 'S/. ' }}</td>
+              <td>{{ doctor.office }}</td>
+              <td><img [src]="doctor.imageUrl" alt="Imagen del doctor" height="50"></td>
+              <td>{{ doctor.modality.join(', ') }}</td>
+              <td>
+                <!-- Botones de acción (editar, etc.) -->
+                <!-- Implementa tu lógica de edición aquí -->
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">No hay doctores para mostrar.</td>
+            </tr>
+          </ng-template>
+            </p-table>
+        </ng-container>
+            <ng-template #loadingTemplate>
+                <p> Cargando doctores... </p> <!-- O algún otro indicador de carga -->
+              </ng-template>
+      </div>
+    </div>
+  </div>
