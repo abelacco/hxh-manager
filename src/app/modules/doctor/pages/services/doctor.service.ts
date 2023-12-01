@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -22,22 +22,28 @@ private readonly endpoint = `${environment.apiEndpoint}doctor`;
   // Crear un nuevo doctor
   createDoctor(doctorData: any): Observable<any> {
     return this.http.post(`${this.endpoint}`, doctorData).pipe(
+      tap(response => console.log('Respuesta completa:', response)),
       catchError(this.handleError)
     );
   }
 
-  // Manejador de errores
-  private handleError(error: any) {
+// Manejador de errores
+private handleError(error: any) {
     let errorMessage = 'Ocurrió un error desconocido';
+
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente
       errorMessage = `Error: ${error.error.message}`;
+    } else if (error && error.error && error.error.message) {
+      // Error del lado del servidor con mensaje personalizado
+      errorMessage = error.error.message; // Si es un array de mensajes, los une
     } else {
       // Error del lado del servidor
       errorMessage = `Código de error: ${error.status}\nMensaje: ${error.message}`;
     }
-    // Aquí podrías agregar más lógica de manejo de errores, como enviar a un servicio de logging
+
     console.error(errorMessage);
-    return errorMessage;
+    return throwError(() => new Error(errorMessage));
   }
+
 }

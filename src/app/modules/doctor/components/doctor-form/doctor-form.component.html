@@ -1,0 +1,66 @@
+<form *ngIf="!isLoading" [formGroup]="doctorForm" (ngSubmit)="onSubmit()" class="bg-white shadow-md rounded max-w-xl mx-auto">
+    <!-- Contenido del formulario -->
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nombre:</label>
+        <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="name" type="text" formControlName="name" placeholder="Nombre del Doctor">
+    </div>
+
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Teléfono:</label>
+        <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="phone" type="text" formControlName="phone" placeholder="Teléfono">
+    </div>
+
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="speciality">Especialidad:</label>
+        <p-dropdown class="w-full" id="speciality" [options]="specialityOptions" optionLabel="label"
+            formControlName="speciality"  optionValue="value"></p-dropdown>
+    </div>
+
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="fee">Tarifa:</label>
+        <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="fee" type="number" formControlName="fee" placeholder="Tarifa">
+    </div>
+
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="office">Oficina:</label>
+        <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="office" type="text" formControlName="office" placeholder="Oficina">
+    </div>
+
+    <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="modality">Modalidad:</label>
+        <p-multiSelect [options]="modalityOptions" defaultLabel="Selecciona modalidades"
+            formControlName="modality"></p-multiSelect>
+    </div>
+
+    <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="fee">Comision:</label>
+        <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="fee" type="number" formControlName="qaliComission" placeholder="Ingresar comision ejemplo: 15% seria 0.15">
+    </div>
+
+
+    <div class="mb-6">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Imagen:</label>
+        <p-fileUpload name="file" mode="advanced" auto chooseLabel="Seleccionar Imagen" customUpload="true" (uploadHandler)="onFileUpload($event)"></p-fileUpload>
+        </div>
+
+
+    <div class="flex items-center justify-between">
+        <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit">
+            Guardar
+        </button>
+    </div>
+</form>
+<p-progressSpinner *ngIf="isLoading"></p-progressSpinner>
+<p-toast></p-toast>

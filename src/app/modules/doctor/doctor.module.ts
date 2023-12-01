@@ -15,14 +15,24 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ImageModule } from 'primeng/image';
 import { ModulesModule } from '../modules.module';
 import { PaginatorModule } from 'primeng/paginator';
-
+import { DoctorFormComponent } from './components/doctor-form/doctor-form.component';
+import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [
         DoctorComponent,
+        DoctorFormComponent,
       ],
       imports: [
         CommonModule,
+        ReactiveFormsModule,
+        FileUploadModule,
+        DropdownModule,
+        DynamicDialogModule,
         DoctorRoutingModule,
         TableModule,
         ButtonModule,
@@ -37,6 +47,11 @@ import { PaginatorModule } from 'primeng/paginator';
         ImageModule,
         ModulesModule,
         PaginatorModule,
+
+      ],
+      providers: [
+        DialogService,
+        MessageService
       ]
 })
 export class DoctorModule { }

@@ -2,14 +2,16 @@
     <div class="col-12">
       <div class="card" >
         <h5>Lista de Doctores</h5>
-        <ng-container *ngIf="!loading; else loadingTemplate">
+        <button type="button" pButton label="Crear Doctor" icon="pi pi-plus" (click)="showDoctorForm()"></button>
+        <ng-container >
         <!-- <p-table [value]="doctors" dataKey="_id" [rows]="limit" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [totalRecords]="totalRecords" (onLazyLoad)="onTableLazyLoad($event)" responsiveLayout="scroll"> -->
-            <p-table [value]="doctors" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"  [showCurrentPageReport]="true"  [rowsPerPageOptions]="[10, 25, 50]" [paginator]="true" [rows]="limit" [totalRecords]="totalRecords" (onLazyLoad)="onPageChange($event)">
+            <p-table [value]="doctors || []"  [rows]="10"  [totalRecords]="totalRecords || 0" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"  [loading]="loading"  [lazy]="true" [showCurrentPageReport]="true"  [rowsPerPageOptions]="[10, 25, 50]"   (onLazyLoad)="onPageChange($event)">
             <ng-template pTemplate="header">
             <tr>
               <th>Doctor</th>
               <th>Especialidad</th>
               <th>Tarifa</th>
+              <th>Comision</th>
               <th>Dirección</th>
               <th>Imagen</th>
               <th>Modalidad</th>
@@ -21,6 +23,7 @@
               <td>{{ doctor.name }}</td>
               <td>{{ doctor.speciality }}</td>
               <td>{{ doctor.fee | currency: 'S/. ' }}</td>
+              <td>{{ doctor?.qaliComission | percent}}</td>
               <td>{{ doctor.office }}</td>
               <td><img [src]="doctor.imageUrl" alt="Imagen del doctor" height="50"></td>
               <td>{{ doctor.modality.join(', ') }}</td>
