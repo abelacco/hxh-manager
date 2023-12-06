@@ -71,7 +71,7 @@ export class AppointmentPageComponent implements OnInit {
 
     confirm1(appointment: Appointment) {
         console.log('Cita a confirmar:', appointment);
-        if (appointment.status === 0) {
+        if (appointment.status === 1) {
             this.confirmationService.confirm({
                 key: 'cd' + appointment._id,
                 message: '¿Deseas aceptar o rechazar el pago?',
