@@ -25,7 +25,17 @@
               <td>{{ doctor.fee | currency: 'S/. ' }}</td>
               <td>{{ doctor?.qaliComission | percent}}</td>
               <td>{{ doctor.office }}</td>
-              <td><img [src]="doctor.imageUrl" alt="Imagen del doctor" height="50"></td>
+              <td
+              class="flex align-items-center justify-content-center"
+          >
+              <p-image
+                  src="{{ doctor?.imageUrl }}"
+                  alt="Image"
+                  width="35"
+                  [preview]="true"
+              ></p-image>
+          </td>
+              <!-- <td><img [src]="doctor.imageUrl" alt="Imagen del doctor" height="50"></td> -->
               <td>{{ doctor.modality.join(', ') }}</td>
               <td>
                 <!-- Botones de acción (editar, etc.) -->

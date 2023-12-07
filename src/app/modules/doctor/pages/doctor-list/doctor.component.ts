@@ -38,6 +38,7 @@ export class DoctorComponent implements OnInit {
   loadDoctors(): void {
     console.log('Cargando doctores:', 'currentPage:', this.currentPage, 'limit:', this.limit);
     this.loading = true;
+    console.log('Parámetros de búsqueda:', this.params);
     this.getDoctors(this.params);
     // Parámetros para paginación y filtros
     // const params = {
@@ -74,8 +75,14 @@ export class DoctorComponent implements OnInit {
     console.log('Evento de cambio de página:', event);
     this.currentPage = event.first / event.rows + 1;
     this.limit = event.rows;
-    console.log('Nueva página:', this.currentPage, 'Nuevo límite:', this.limit);
-    // this.loadDoctors();
+    this.params = {
+        ...this.params, // Mantener los filtros existentes
+        offset: (this.currentPage - 1) * this.limit,
+        limit: this.limit
+      };
+
+    console.log('Nueva página:', this.params , this.currentPage, 'Nuevo límite:', this.limit);
+    this.loadDoctors();
   }
 
   showDoctorForm() {
