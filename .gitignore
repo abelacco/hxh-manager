@@ -36,6 +36,7 @@ testem.log
 /.firebase
 .firebase
 .firebaserc
+firebase.json
 /.firebaserc
 
 # System files
