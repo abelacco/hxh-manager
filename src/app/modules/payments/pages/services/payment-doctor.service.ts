@@ -10,13 +10,12 @@ import { environment } from '../../../../../environments/environment';
 export class PaymentDoctorService {
 
     private readonly endpoint = `${environment.apiEndpoint}payment`;
-    // private readonly endpoint = 'http://localhost:3001/api/v1/appointment';
 
 
     constructor(private http: HttpClient) { }
 
     getPaymentsDoctors(): Observable<IPaymentDoctor[]> {
-        
+
         return this.http.get<IPaymentDoctor[]>(this.endpoint);
       }
 

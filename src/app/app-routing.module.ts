@@ -13,6 +13,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'citas', loadChildren: () => import('./modules/appointment/appointment.module').then(m => m.AppointmentModule) },
                     { path: 'liquidaciones', loadChildren: () => import('./modules/payments/payments.module').then(m => m.PaymentsModule) },
                     { path: 'doctores', loadChildren: () => import('./modules/doctor/doctor.module').then(m => m.DoctorModule) },
+                    { path: 'mensajes', loadChildren: () => import('./modules/messages/messages.module').then(m => m.MessagesModule) },
                     // { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
                 ]
             },

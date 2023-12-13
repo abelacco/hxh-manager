@@ -36,6 +36,8 @@ export class AppMenuComponent implements OnInit {
                             // { label: 'Hunter Doctor', icon: 'pi pi-fw pi-user-edit', routerLink: ['/liquidaciones/hunter-doctor'] }
                         ]
                     },
+                    { label: 'Mensajes', icon: 'pi pi-fw pi-table', routerLink: ['/mensajes'] },
+
 
                 ]
             },
