@@ -46,10 +46,10 @@ export class AppointmentPageComponent implements OnInit {
             next: (data: Appointment[]) => {
                 this.appointments = data;
                 this.loading = false;
-                console.log('Citas cargadas:', this.appointments);
+                console.log('Reservas cargadas:', this.appointments);
             },
             error: (error) => {
-                console.error('Error al obtener las citas:', error);
+                console.error('Error al obtener las reservas:', error);
                 this.loading = false;
             },
         });
@@ -71,7 +71,7 @@ export class AppointmentPageComponent implements OnInit {
 
     confirm1(appointment: Appointment) {
         console.log('Cita a confirmar:', appointment);
-        if (appointment.status === 1) {
+        if (appointment.status === '1') {
             this.confirmationService.confirm({
                 key: 'cd' + appointment._id,
                 message: '¿Deseas aceptar o rechazar el pago?',
@@ -79,13 +79,12 @@ export class AppointmentPageComponent implements OnInit {
                 icon: 'pi pi-exclamation-triangle',
             });
         }
-        console.log('Cita a confirmar:1');
     }
 
     acceptAppointment(appointment: Appointment) {
         this.loadingUpdate = true;
         // Aquí es donde actualizas el estado de la cita y luego llamas al servicio para guardar el cambio
-        appointment.status = 2;
+        appointment.status = '2';
         this.updateAppoinment(appointment);
         this.messageService.add({
             severity: 'info',
@@ -98,7 +97,7 @@ export class AppointmentPageComponent implements OnInit {
 
     rejectAppointment(appointment: Appointment) {
         this.loadingUpdate = true;
-        appointment.status = 3; // Puedes cambiar esto según tu lógica
+        appointment.status = '3'; // Puedes cambiar esto según tu lógica
         this.updateAppoinment(appointment);
         this.messageService.add({
             severity: 'error',
@@ -110,7 +109,7 @@ export class AppointmentPageComponent implements OnInit {
     }
 
     cursorAppointment(appointment: Appointment) {
-        if (appointment.status === 1) {
+        if (appointment.status === '1') {
             return { cursor: 'pointer' };
         } else {
             return { cursor: 'auto' };

@@ -7,21 +7,21 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorService {
-private readonly endpoint = `${environment.apiEndpoint}doctor`;
+export class ProviderService {
+private readonly endpoint = `${environment.apiEndpoint}provider`;
 
   constructor(private http: HttpClient) {}
 
-  // Obtener doctores
-  getDoctors(params: any): Observable<any> {
+  // Obtener providers
+  getProviders(params: any): Observable<any> {
     return this.http.get(`${this.endpoint}/paginate`, { params }).pipe(
       catchError(this.handleError)
     );
   }
 
-  // Crear un nuevo doctor
-  createDoctor(doctorData: any): Observable<any> {
-    return this.http.post(`${this.endpoint}`, doctorData).pipe(
+  // Crear un nuevo provider
+  createProvider(providerData: any): Observable<any> {
+    return this.http.post(`${this.endpoint}`, providerData).pipe(
       tap(response => console.log('Respuesta completa:', response)),
       catchError(this.handleError)
     );

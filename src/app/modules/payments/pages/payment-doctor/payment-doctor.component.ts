@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IPaymentDoctor } from '../../interface/paymentDoctor';
+import { IPaymentProvider } from '../../interface/paymentProvider';
 import { PaymentDoctorService } from '../services/payment-doctor.service';
 
 import {
@@ -16,7 +16,7 @@ import {
 export class PaymentDoctorComponent implements OnInit {
 
     loading: boolean = false;
-    payments: IPaymentDoctor[] = []; // Un array para guardar los pagos.
+    payments: IPaymentProvider[] = []; // Un array para guardar los pagos.
 
     constructor(
         private paymentDoctorService: PaymentDoctorService,

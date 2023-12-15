@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DoctorComponent } from './pages/doctor-list/doctor.component';
-import { DoctorRoutingModule } from './doctor-routing.module';
+import { ProviderComponent } from './pages/provider-list/provider.component';
+import { ProviderRoutingModule } from './provider-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -15,7 +15,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ImageModule } from 'primeng/image';
 import { ModulesModule } from '../modules.module';
 import { PaginatorModule } from 'primeng/paginator';
-import { DoctorFormComponent } from './components/doctor-form/doctor-form.component';
+import { ProviderFormComponent } from './components/provider-form/provider-form.component';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
@@ -24,8 +24,8 @@ import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [
-        DoctorComponent,
-        DoctorFormComponent,
+        ProviderComponent,
+        ProviderFormComponent,
       ],
       imports: [
         CommonModule,
@@ -33,7 +33,7 @@ import { MessageService } from 'primeng/api';
         FileUploadModule,
         DropdownModule,
         DynamicDialogModule,
-        DoctorRoutingModule,
+        ProviderRoutingModule,
         TableModule,
         ButtonModule,
         InputTextModule,
@@ -54,4 +54,4 @@ import { MessageService } from 'primeng/api';
         MessageService
       ]
 })
-export class DoctorModule { }
+export class ProviderModule { }

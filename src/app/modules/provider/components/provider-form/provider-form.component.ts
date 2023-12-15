@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MessageService, SelectItem } from 'primeng/api';
-import { DoctorService } from '../../pages/services/doctor.service';
+import { ProviderService } from '../../pages/services/provider.service';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, first, takeUntil } from 'rxjs';
 
 @Component({
-    selector: 'app-doctor-form',
-    templateUrl: './doctor-form.component.html',
-    styleUrls: ['./doctor-form.component.scss']
+    selector: 'app-provider-form',
+    templateUrl: './provider-form.component.html',
+    styleUrls: ['./provider-form.component.scss']
 })
-export class DoctorFormComponent {
-    doctorForm: FormGroup;
+export class ProviderFormComponent {
+    providerForm: FormGroup;
     specialityOptions: SelectItem[];
     modalityOptions: SelectItem[] = [
         { label: 'Presencial', value: '0' },
@@ -22,7 +22,7 @@ export class DoctorFormComponent {
 
     constructor(
         private fb: FormBuilder,
-        private doctorService: DoctorService,
+        private providerService: ProviderService,
         private messageService: MessageService,
         public ref: DynamicDialogRef
     ) {
@@ -47,7 +47,7 @@ export class DoctorFormComponent {
     ngOnInit() {
 
 
-        this.doctorForm = this.fb.group({
+        this.providerForm = this.fb.group({
             phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
             speciality: new FormControl('', Validators.required),
             fee: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
@@ -62,7 +62,7 @@ export class DoctorFormComponent {
     onFileChange(event) {
         if (event.files.length > 0) {
             const file = event.files[0];
-            this.doctorForm.patchValue({
+            this.providerForm.patchValue({
                 file: file
             });
         }
@@ -74,7 +74,7 @@ export class DoctorFormComponent {
     onFileUpload(event) {
         if (event.files.length > 0) {
             const file = event.files[0];
-            this.doctorForm.patchValue({
+            this.providerForm.patchValue({
                 file: file
             });
 
@@ -90,10 +90,10 @@ export class DoctorFormComponent {
 
     onSubmit() {
         this.isLoading = true;
-        console.log('Formulario:', this.doctorForm.value);
+        console.log('Formulario:', this.providerForm.value);
         if (this.verifyFormValidity()) {
             const formData = new FormData();
-            Object.entries(this.doctorForm.value).forEach(([key, value]: [string, any]) => {
+            Object.entries(this.providerForm.value).forEach(([key, value]: [string, any]) => {
                 if (key === 'file') {
                     if (value) {
                         formData.append('file', value, value.name); // Usa 'file' aquí también
@@ -110,38 +110,22 @@ export class DoctorFormComponent {
                 }
             });
             // console.log('Formulario:', formData);
-            this.doctorService.createDoctor(formData)
+            this.providerService.createProvider(formData)
                 .pipe(takeUntil(this.unsubscribe$))
                 .subscribe({
                     next: (response) => {
                         console.log('Respuesta de la API:', response);
                         this.isLoading = false;
-                        this.showToast('success', 'Éxito', 'Doctor creado con éxito.');
-                        this.ref.close('doctorCreated');
+                        this.showToast('success', 'Éxito', 'Proveedor creado con éxito.');
+                        this.ref.close('providerCreated');
                     },
                     error: (error) => {
-                        console.error('Error al cargar los doctores:', error);
+                        console.error('Error al cargar los proveedores:', error);
                         this.isLoading = false;
                         this.showToast('error', 'Error', error.message);
                     }
                 });
-            // this.doctorService.createDoctor(this.doctorForm.value).subscribe(
-            //     {
-            //     next: (response) => {
-            //         console.log('Doctor creado con éxito', response);
-            //         this.isLoading = false;
-            //         this.showToast('success', 'Éxito', 'Doctor creado con éxito.');
-            //         // this.ref.close('doctorCreated');
-            //         // Aquí puedes agregar lógica adicional, como redirigir al usuario o limpiar el formulario
-            //     },
-            //     error: (error) => {
-            //         console.error('Error al crear el doctor', error);
-            //         this.isLoading = false;
-            //         this.showToast('error', 'Error', error.error.message);
-            //         // Manejar errores, como mostrar un mensaje al usuario
-            //     }
-            // }
-            // );
+
         } else {
             // Manejar el caso en que el formulario no sea válido
             this.isLoading = false;
@@ -151,33 +135,33 @@ export class DoctorFormComponent {
     verifyFormValidity() {
         let isFormValid = true;
 
-        if (this.doctorForm.get('name').invalid) {
-            this.showToast('error', 'Error', 'Nombre del doctor es requerido.');
+        if (this.providerForm.get('name').invalid) {
+            this.showToast('error', 'Error', 'Nombre del hotel es requerido.');
             isFormValid = false;
         }
-        if (this.doctorForm.get('phone').invalid) {
+        if (this.providerForm.get('phone').invalid) {
             this.showToast('error', 'Error', 'Teléfono es requerido.');
             isFormValid = false;
         }
-        if (this.doctorForm.get('speciality').invalid) {
+        if (this.providerForm.get('speciality').invalid) {
             this.showToast('error', 'Error', 'Especialidad es requerida.');
             isFormValid = false;
         }
-        if (this.doctorForm.get('fee').invalid) {
+        if (this.providerForm.get('fee').invalid) {
             this.showToast('error', 'Error', 'Tarifa es requerida.');
             isFormValid = false;
         }
-        if (this.doctorForm.get('modality').invalid) {
+        if (this.providerForm.get('modality').invalid) {
             this.showToast('error', 'Error', 'Modalidad es requerida.');
             isFormValid = false;
         }
-        if (this.doctorForm.get('office').invalid) {
+        if (this.providerForm.get('office').invalid) {
             this.showToast('error', 'Error', 'Oficina es requerida.');
             isFormValid = false;
         }
 
-        if (this.doctorForm.get('file').invalid) {
-            this.showToast('error', 'Error', 'Imagen del doctor es requerida.');
+        if (this.providerForm.get('file').invalid) {
+            this.showToast('error', 'Error', 'Imagen del provider es requerida.');
             isFormValid = false;
         }
         // Repite esto para cada campo del formulario

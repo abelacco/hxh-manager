@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '../services/doctor.service';
+import { ProviderService } from '../services/provider.service';
 import { DialogService } from 'primeng/dynamicdialog';
-import { DoctorFormComponent } from '../../components/doctor-form/doctor-form.component';
+import { ProviderFormComponent } from '../../components/provider-form/provider-form.component';
 import { Subject, first, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-doctors',
-  templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.scss'],
+  selector: 'app-providers',
+  templateUrl: './provider.component.html',
+  styleUrls: ['./provider.component.scss'],
   providers: [DialogService]
 })
-export class DoctorComponent implements OnInit {
+export class ProviderComponent implements OnInit {
   doctors: [] = [];
   totalRecords: number;
   currentPage: number = 1;
@@ -26,17 +26,17 @@ export class DoctorComponent implements OnInit {
   };
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private doctorService: DoctorService,
+  constructor(private providerService: ProviderService,
     private dialogService: DialogService,
     ) {}
 
   ngOnInit(): void {
     console.log('Inicializando componente');
-    this.loadDoctors();
+    this.loadProviders();
   }
 
-  loadDoctors(): void {
-    console.log('Cargando doctores:', 'currentPage:', this.currentPage, 'limit:', this.limit);
+  loadProviders(): void {
+    console.log('Cargando proveedores:', 'currentPage:', this.currentPage, 'limit:', this.limit);
     this.loading = true;
     console.log('Parámetros de búsqueda:', this.params);
     this.getDoctors(this.params);
@@ -54,18 +54,18 @@ export class DoctorComponent implements OnInit {
 
   getDoctors(params: any) {
 
-    this.doctorService.getDoctors(params)
+    this.providerService.getProviders(params)
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe({
         next: (response) => {
             console.log('Respuesta de la API:', response);
             this.doctors = response.data.data;
             this.totalRecords = response.data.total;
-            console.log('Doctores:', this.doctors);
+            console.log('proveedores:', this.doctors);
             this.loading = false;
         },
         error: (error) => {
-            console.error('Error al cargar los doctores:', error);
+            console.error('Error al cargar los proveedores:', error);
             this.loading = false;
         }
     });
@@ -82,19 +82,19 @@ export class DoctorComponent implements OnInit {
       };
 
     console.log('Nueva página:', this.params , this.currentPage, 'Nuevo límite:', this.limit);
-    this.loadDoctors();
+    this.loadProviders();
   }
 
   showDoctorForm() {
-    const ref = this.dialogService.open(DoctorFormComponent, {
-        header: 'Crear Nuevo Doctor',
+    const ref = this.dialogService.open(ProviderFormComponent, {
+        header: 'Crear Nuevo Proveedor',
         width: '30%',
         // ...otros parámetros...
     });
 
     ref.onClose.subscribe((result) => {
-        if (result === 'doctorCreated') {
-            this.loadDoctors(); // Actualiza la lista de doctores
+        if (result === 'providerCreated') {
+            this.loadProviders(); // Actualiza la lista de proveedores
         }
     });
 }

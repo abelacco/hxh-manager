@@ -16,6 +16,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ImageModule } from 'primeng/image';
+import { ModulesModule } from '../modules.module'
 @NgModule({
     declarations: [AppointmentPageComponent, StatusPipe, SeverityPipe],
     imports: [
@@ -32,6 +33,7 @@ import { ImageModule } from 'primeng/image';
         ProgressSpinnerModule,
         MultiSelectModule,
         ImageModule,
+        ModulesModule
     ],
     providers: [ConfirmationService],
 })

@@ -14,29 +14,29 @@ export class AppMenuComponent implements OnInit {
 
     ngOnInit() {
         this.model = [
-            {
-                label: 'Home',
-                items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
-                ]
-            },
+            // {
+            //     label: 'Home',
+            //     items: [
+            //         { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+            //     ]
+            // },
             {
                 label: 'Panel de Control',
                 items: [
 
-                    { label: 'Citas', icon: 'pi pi-fw pi-table', routerLink: ['/citas'] },
-                    { label: 'Doctores', icon: 'pi pi-fw pi-table', routerLink: ['/doctores'] },
-                    {
-                        label: 'Liquidaciones',
-                        icon: 'pi pi-fw pi-money-bill', // Puedes cambiar el icono según tus necesidades
-                        items: [
-                            { label: 'Doctores', icon: 'pi pi-fw pi-user', routerLink: ['/liquidaciones/doctores'] },
-                            // { label: 'Hunter', icon: 'pi pi-fw pi-user-plus', routerLink: ['/liquidaciones/hunter'] },
-                            // { label: 'Bodega', icon: 'pi pi-fw pi-users', routerLink: ['/liquidaciones/bodega'] },
-                            // { label: 'Hunter Doctor', icon: 'pi pi-fw pi-user-edit', routerLink: ['/liquidaciones/hunter-doctor'] }
-                        ]
-                    },
-                    { label: 'Mensajes', icon: 'pi pi-fw pi-table', routerLink: ['/mensajes'] },
+                    { label: 'Reservas', icon: 'pi pi-fw pi-table', routerLink: ['/reservas'] },
+                    // { label: 'Proveedores', icon: 'pi pi-fw pi-table', routerLink: ['/doctores'] },
+                    // {
+                    //     label: 'Liquidaciones',
+                    //     icon: 'pi pi-fw pi-money-bill', // Puedes cambiar el icono según tus necesidades
+                    //     items: [
+                    //         { label: 'Doctores', icon: 'pi pi-fw pi-user', routerLink: ['/liquidaciones/doctores'] },
+                    //         // { label: 'Hunter', icon: 'pi pi-fw pi-user-plus', routerLink: ['/liquidaciones/hunter'] },
+                    //         // { label: 'Bodega', icon: 'pi pi-fw pi-users', routerLink: ['/liquidaciones/bodega'] },
+                    //         // { label: 'Hunter Doctor', icon: 'pi pi-fw pi-user-edit', routerLink: ['/liquidaciones/hunter-doctor'] }
+                    //     ]
+                    // },
+                    // { label: 'Mensajes', icon: 'pi pi-fw pi-table', routerLink: ['/mensajes'] },
 
 
                 ]

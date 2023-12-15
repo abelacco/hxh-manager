@@ -1,10 +1,10 @@
-<form *ngIf="!isLoading" [formGroup]="doctorForm" (ngSubmit)="onSubmit()" class="bg-white shadow-md rounded max-w-xl mx-auto">
+<form *ngIf="!isLoading" [formGroup]="providerForm" (ngSubmit)="onSubmit()" class="bg-white shadow-md rounded max-w-xl mx-auto">
     <!-- Contenido del formulario -->
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nombre:</label>
         <input
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="name" type="text" formControlName="name" placeholder="Nombre del Doctor">
+            id="name" type="text" formControlName="name" placeholder="Nombre del Proveedor">
     </div>
 
     <div class="mb-4">
@@ -14,11 +14,11 @@
             id="phone" type="text" formControlName="phone" placeholder="Teléfono">
     </div>
 
-    <div class="mb-4">
+    <!-- <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="speciality">Especialidad:</label>
         <p-dropdown class="w-full" id="speciality" [options]="specialityOptions" optionLabel="label"
             formControlName="speciality"  optionValue="value"></p-dropdown>
-    </div>
+    </div> -->
 
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="fee">Tarifa:</label>

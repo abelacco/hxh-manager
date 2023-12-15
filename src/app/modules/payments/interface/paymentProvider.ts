@@ -1,4 +1,4 @@
-export interface IPaymentDoctor {
+export interface IPaymentProvider {
     _id: string;
     startDate: string;
     endDate: string;
@@ -14,7 +14,7 @@ export interface IPaymentDoctor {
     appointmentQ: number;
     transactionBeforeFee: number;
     doctorEarnings: number;
-    qaliFee: number;
+    providerFee: number;
     status: number;
     paymentDate: string;
     __v: number;

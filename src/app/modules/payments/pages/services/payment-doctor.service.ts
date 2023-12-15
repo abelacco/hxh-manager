@@ -1,7 +1,7 @@
 import { HttpClient , HttpParams  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { IPaymentDoctor } from '../../interface/paymentDoctor';
+import { IPaymentProvider } from '../../interface/paymentProvider';
 import { environment } from '../../../../../environments/environment';
 
 @Injectable({
@@ -14,12 +14,12 @@ export class PaymentDoctorService {
 
     constructor(private http: HttpClient) { }
 
-    getPaymentsDoctors(): Observable<IPaymentDoctor[]> {
+    getPaymentsDoctors(): Observable<IPaymentProvider[]> {
 
-        return this.http.get<IPaymentDoctor[]>(this.endpoint);
+        return this.http.get<IPaymentProvider[]>(this.endpoint);
       }
 
-    updateStatusPaymentsDoctors(appointmentUpdate: any): Observable<IPaymentDoctor[]> {
+    updateStatusPaymentsDoctors(appointmentUpdate: any): Observable<IPaymentProvider[]> {
         console.log('Pago a actualizar:', appointmentUpdate);
         return this.http.patch<any>(`${this.endpoint}/update/status/${appointmentUpdate._id}`, {status: appointmentUpdate.status})
             .pipe(

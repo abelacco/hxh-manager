@@ -1,13 +1,13 @@
-export interface Doctor {
+export interface Provider {
     _id: string;
     name: string;
     phone: string;
-    speciality: string;
+    // speciality: string;
     fee: number;
     __v: number;
 }
 
-export interface Patient {
+export interface Client {
     _id: string;
     name: string;
     phone: string;
@@ -17,11 +17,11 @@ export interface Patient {
 
 export interface Appointment {
     _id: string;
-    doctorId: Doctor;
-    patientId: Patient;
+    providerId: Provider;
+    clientId: Client;
     date: Date;
     fee: number;
-    status: number;
+    status: string;
     code: string;
     voucher: string;
     __v: number;

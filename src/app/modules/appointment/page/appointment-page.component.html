@@ -1,7 +1,7 @@
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <h5>Citas</h5>
+            <h5>Reservas</h5>
             <p-table
                 #dt1
                 [value]="appointments"
@@ -108,14 +108,14 @@
                             <div
                                 class="flex justify-content-between align-items-center"
                             >
-                                Doctor
+                                Proveedor
                             </div>
                         </th>
                         <th style="min-width: 12rem">
                             <div
                                 class="flex justify-content-between align-items-center"
                             >
-                                Paciente
+                                Cliente
                             </div>
                         </th>
 
@@ -163,16 +163,16 @@
                             ></p-image>
                         </td>
                         <td>
-                            {{ appointment.doctorId.name }}
+                            {{ appointment.providerId.name }}
                         </td>
                         <td>
-                            {{ appointment?.patientId?.name }}
+                            {{ appointment?.clientId?.name }}
                         </td>
                         <td>
-                            {{ appointment.date | date : "short" }}
+                            {{ appointment.date | date: "dd/MM/yyyy hh:mm a" }}
                         </td>
                         <td>
-                            {{ appointment.fee | currency : "USD" : "symbol" }}
+                            {{ appointment.fee | currency : "PEN" : "symbol" }}
                         </td>
                         <td>
                             <div>
